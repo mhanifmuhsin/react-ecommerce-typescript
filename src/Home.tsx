@@ -65,7 +65,7 @@ const Home: FC = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-item nav-link" href="#" data-toggle="modal" data-target="#cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart <span style={{ color: 'red' }}>{carts.length}</span></a>
+                        <a className="nav-item nav-link" href="#" data-toggle="modal" data-target="#cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart <span className='totalItem'>{carts.length}</span></a>
                     </div>
                 </div>
                 <form className="form-inline my-2 my-lg-0">

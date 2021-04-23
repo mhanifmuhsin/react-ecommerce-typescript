@@ -2,3 +2,13 @@ body {
   min-height: 75rem;
   padding-top: 4.5rem;
 }
+
+.totalItem {
+  width: 25px;
+	height: 25px;
+	background: red;
+  color: aliceblue;
+	border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+}
