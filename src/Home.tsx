@@ -147,7 +147,7 @@ const Home: FC = () => {
                                 {carts.length > 0 ? (
                                     <div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#payment" onClick={resetCart} >Pay</button>
+                                        <button type="button" className="btn btn-primary m-2" data-dismiss="modal" data-toggle="modal" data-target="#payment" onClick={resetCart} >Pay</button>
                                     </div>
                                 ) : (
                                     <div>
