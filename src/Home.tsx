@@ -57,6 +57,7 @@ const Home: FC = () => {
     }
     return (
         <>
+        {/* Navbar */}
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <a className="navbar-brand" href="#">E-Commerce</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,6 +74,7 @@ const Home: FC = () => {
                 </form>
             </nav>
 
+        {/* Content */}
             <div className='container'>
                 <div className='flex row'>
                     {products.length > 0 ? (
