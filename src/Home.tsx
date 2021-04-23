@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import productList from './data';
 
 interface IProducts {
@@ -19,30 +19,39 @@ interface ICarts {
 }
 
 const Home: FC = () => {
+    // products state
     const [products, setProduct] = useState<IProducts[]>(productList)
+    // product preview state
     const [productPreview, setProductPreview] = useState<IProducts[]>()
+    // carts state
     const [carts, setCart] = useState<ICarts[]>([])
+    // initial carts state
     const initialState: ICarts[] = [];
+    // function for find by id
     const findById = (id: Number) => {
         setProductPreview(products.filter(product => product.id === id));
     }
+    // function for find by category
     const findByCategory = (category: String) => {
         setProduct(products.filter(product => product.category === category))
     }
+    // on change for set product list to normal
     const onChangeCategory = () => {
         setProduct(productList);
     }
+    // function for handle cart (add to cart)
     const handleCart = (name: String, price: number) => {
         const id = Math.floor(Math.random() * 100)
         const data = { id: id, name: name, price: price }
         setCart([...carts, data]);
     }
+    // function for delete item in cart
     const deleteItem = (id: Number) => setCart(carts.filter(item => item.id !== id));
-
+    // function for calculate total payment 
     const totalPayment = carts.reduce((total: number, item: ICarts) => {
         return total + (item.price)
     }, 0)
-
+    // function for reset cart to 0
     const resetCart = () => {
         setCart(initialState);
     }
@@ -148,7 +157,7 @@ const Home: FC = () => {
                                                         return <tr key={index}>
                                                             <td>{item.name}</td>
                                                             <td>{item.price}</td>
-                                                            <td><button type='button' onClick={() => deleteItem(item.id)}>x</button></td>
+                                                            <td><button type='button' onClick={() => deleteItem(item.id)}><FontAwesomeIcon icon={faTrashAlt} /> </button></td>
                                                         </tr>
                                                     })}
                                                 </tbody>
