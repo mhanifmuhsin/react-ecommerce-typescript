@@ -23,3 +23,5 @@ Features :
 4. Remove item
 
 5. Payment
+
+6. Search by category
