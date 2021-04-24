@@ -4,17 +4,17 @@ import { faShoppingCart,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import productList from './data';
 
 interface IProducts {
-    id: Number,
-    name: String,
-    category: String,
+    id: number,
+    name: string,
+    category: string,
     price: number,
     picture: string,
-    detail: String
+    detail: string
 }
 
 interface ICarts {
-    id: Number
-    name: String,
+    id: number
+    name: string,
     price: number
 }
 
@@ -28,11 +28,11 @@ const Home: FC = () => {
     // initial carts state
     const initialState: ICarts[] = [];
     // function for find by id
-    const findById = (id: Number) => {
+    const findById = (id: number) => {
         setProductPreview(products.filter(product => product.id === id));
     }
     // function for find by category
-    const findByCategory = (category: String) => {
+    const findByCategory = (category: string) => {
         setProduct(products.filter(product => product.category === category))
     }
     // on change for set product list to normal
@@ -40,13 +40,13 @@ const Home: FC = () => {
         setProduct(productList);
     }
     // function for handle cart (add to cart)
-    const handleCart = (name: String, price: number) => {
+    const handleCart = (name: string, price: number) => {
         const id = Math.floor(Math.random() * 100)
         const data = { id: id, name: name, price: price }
         setCart([...carts, data]);
     }
     // function for delete item in cart
-    const deleteItem = (id: Number) => setCart(carts.filter(item => item.id !== id));
+    const deleteItem = (id: number) => setCart(carts.filter(item => item.id !== id));
     // function for calculate total payment 
     const totalPayment = carts.reduce((total: number, item: ICarts) => {
         return total + (item.price)
