@@ -15,7 +15,8 @@ interface IProducts {
 interface ICarts {
     id: number
     name: string,
-    price: number
+    price: number,
+    quantity:number
 }
 
 const Home: FC = () => {
@@ -42,19 +43,51 @@ const Home: FC = () => {
     // function for handle cart (add to cart)
     const handleCart = (name: string, price: number) => {
         const id = Math.floor(Math.random() * 100)
-        const data = { id: id, name: name, price: price }
+        const data = { id: id, name: name, price: price, quantity:1 }
         setCart([...carts, data]);
     }
     // function for delete item in cart
     const deleteItem = (id: number) => setCart(carts.filter(item => item.id !== id));
     // function for calculate total payment 
     const totalPayment = carts.reduce((total: number, item: ICarts) => {
-        return total + (item.price)
+        return total + (item.price * item.quantity)
     }, 0)
     // function for reset cart to 0
     const resetCart = () => {
         setCart(initialState);
     }
+
+    // function for add quantity
+    const addQty = (clickedItem: ICarts) => {
+        setCart(prev => {
+          // 1. Is the item already added in the cart?
+          const isItemInCart = prev.find(item => item.id === clickedItem.id);
+    
+          if (isItemInCart) {
+            return prev.map(item =>
+              item.id === clickedItem.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            );
+          }
+          // First time the item is added
+          return [...prev, { ...clickedItem, quantity: 1 }];
+        });
+      };
+
+    //   function for remove quantity
+      const removeQty = (id: number) => {
+        setCart(prev =>
+          prev.reduce((ack, item) => {
+            if (item.id === id) {
+              if (item.quantity === 1) return ack;
+              return [...ack, { ...item, quantity: item.quantity - 1 }];
+            } else {
+              return [...ack, item];
+            }
+          }, [] as ICarts[])
+        );
+      };
     return (
         <>
         {/* Navbar */}
@@ -149,6 +182,8 @@ const Home: FC = () => {
                                                     <tr>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Price</th>
+                                                        <th scope="col">Qty</th>
+                                                        <th scope="col">Total</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
@@ -157,6 +192,8 @@ const Home: FC = () => {
                                                         return <tr key={index}>
                                                             <td>{item.name}</td>
                                                             <td>{item.price}</td>
+                                                            <td><button onClick={()=>removeQty(item.id)}>-</button>{item.quantity}<button onClick={()=>addQty(item)}>+</button></td>
+                                                            <td>{item.price * item.quantity}</td>
                                                             <td><button type='button' onClick={() => deleteItem(item.id)}><FontAwesomeIcon icon={faTrashAlt} /> </button></td>
                                                         </tr>
                                                     })}

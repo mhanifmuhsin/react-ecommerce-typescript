@@ -25,3 +25,5 @@ Features :
 5. Payment
 
 6. Search by category
+
+7. Add and Remove Quantity
