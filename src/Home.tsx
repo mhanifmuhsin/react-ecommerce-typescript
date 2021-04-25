@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart,faTrashAlt, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import productList from './data';
 
 interface IProducts {
@@ -192,7 +192,7 @@ const Home: FC = () => {
                                                         return <tr key={index}>
                                                             <td>{item.name}</td>
                                                             <td>{item.price}</td>
-                                                            <td><button onClick={()=>removeQty(item.id)}>-</button>{item.quantity}<button onClick={()=>addQty(item)}>+</button></td>
+                                                            <td><button className='mr-2' onClick={()=>removeQty(item.id)}><FontAwesomeIcon icon={faMinus}/></button>{item.quantity}<button className='ml-2' onClick={()=>addQty(item)}><FontAwesomeIcon icon={faPlus}/></button></td>
                                                             <td>{item.price * item.quantity}</td>
                                                             <td><button type='button' onClick={() => deleteItem(item.id)}><FontAwesomeIcon icon={faTrashAlt} /> </button></td>
                                                         </tr>
